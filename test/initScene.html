@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<title>Initialize scene</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<script type="text/javascript" src="../libs/jquery.base.js"></script>
+		<script type="text/javascript" src="../libs/webglUtils.js"></script>
+		<script type="text/javascript" src="../libs/glMatrix.js"></script>
+		
+		<script id="shader-vs" type="x-shader/x-vertex">
+			attribute vec3 aVertexPosition;
+
+			uniform mat4 uMVMatrix;
+			uniform mat4 uPMatrix;
+
+			void main(void) {
+				gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+			}
+		</script>
+
+		<script id="shader-fs" type="x-shader/x-fragment">
+			#ifdef GL_ES
+			precision highp float;
+			#endif
+
+			void main(void) {
+				gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+			}
+		</script>
+		
+		<script type="text/javascript" src="../src/mouse.js"></script>
+		<script type="text/javascript" src="../src/particle.js"></script>
+		<script type="text/javascript" src="../src/scene.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500"></canvas>
+		<p>Click on the canvas to create a "particle".</p>
+		<script>
+			scene.initScene( document.getElementById( "canvas" ) );
+		</script>
+	</body>
+</html>
